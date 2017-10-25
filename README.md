@@ -1,10 +1,12 @@
 # PostgreSQL + Docker Quickstart
 
-This is a quick example of how to setup PostgreSQL inside a Docker container.
+This is a quick example of how to setup PostgreSQL inside a Docker container. It builds on the Docker Hub official Postgres image by copying bash scripts and SQL files into a folder on the running container. These scripts are executed in lexicographical (1-9, A-Z) order.
 
-It builds on the Docker Hub official Postgres image by copying bash scripts and SQL files into a folder on the running container. These scripts are executed in lexicographical (1-9, A-Z) order.
+As an example:
 
-As an example, `sql/1-schema.sql` creates a simple relation of `HubUser`s. Then, `sql/2-initial_data.sql` populates it with a row of data. Finally, `scripts/3-hello.sh` runs and echoes a message.
+1. `sql/1-schema.sql` creates a simple relation of `HubUser`s;
+2. `sql/2-initial_data.sql` populates it with a row of data;
+3. `scripts/3-hello.sh` runs and echoes a message.
 
 To build the image:
 
@@ -27,3 +29,5 @@ psql -hlocalhost -Upostgres -dhub
 ```
 
 Here, `hub` is the name of the database; this is set in the Dockerfile on line 4 by the environment variable `POSTGRES_DB`. `postgres` is the default user, which doesn't require authentication, but it'd also be possible to create a new user to access the database.
+
+If the SQL files for initialization start getting large, it's possible to use gzipped SQL files: just drop them in the `sql` folder.
